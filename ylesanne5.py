@@ -18,5 +18,6 @@ else :
     except ValueError:
         print("Kas sa ikka sisestasid summa numbritega?")
         
-moneyInEur = round((eek*excangeRate),2)
-print(f"See kogus raha on eurodes {moneyInEur}€" )
+if eek!=0:
+    moneyInEur = round((eek/excangeRate),2)
+    print(f"See kogus raha on eurodes {moneyInEur}€" )
