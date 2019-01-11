@@ -6,30 +6,34 @@
 # Lisaks tuleb kontrollida, kas etteantud küljepikkustega 
 # kolmnurk saab üldse eksisteerida. 
 # Külje pikkused ei pea olema täisarvud. (ujukomaarv - float)
-triangleSides=set()
+
+triangleEdges=[]
 for triangleSide in range(1,4):
     side=float(input(f"Sisesta kolmnurga {triangleSide}. külje pikkus: "))
-    triangleSides.add(side)
+    triangleEdges.append(side)
 
-def isTriangle(triangleSides):
-    longestSide=max(triangleSides)
-    shortestSide=min(triangleSides)
-    triangleSides.remove(longestSide)
-    shorterSide=max(triangleSides)
+def isTriangle(edge):
+    longestSide=max(edge)
+    shortestSide=min(edge)
+    edge.remove(longestSide)
+    edge.remove(shortestSide)
+    shorterSide=edge[0]
     if longestSide<(shorterSide+shortestSide):
         return True
     else:
         return False
 
+triangleSides=set(triangleEdges)
+
 if len(triangleSides)==1:
     print("Tegu on võrdkülgse kolmnurgaga")
 elif len(triangleSides)==2:
-    if isTriangle(triangleSides):
+    if isTriangle(triangleEdges):
         print("Tegu on võrdhaarse kolmnurgaga")
     else:
         print("Säherduste mõõtmete korral ei saa kolmnurk eksisteerida")
 elif len(triangleSides)==3:
-    if isTriangle(triangleSides):
+    if isTriangle(triangleEdges):
         print("Tegu on erikülgse kolmnurgaga")
     else:
         print("Säherduste mõõtmete korral ei saa kolmnurk eksisteerida")
