@@ -8,21 +8,25 @@ expenses={"Frank":{"Tea":130, "Coffee":143}, "Jane":{"Tea":59, "Coffee":198}}
 
 #Sales people get paid using the following formula for the total commission: commission is 6.2% of profit, with no commission for any product to total less than zero.
 def profit(revenue, expenses):
-    profits={}
+    commissions={}
     people=[]
     drinks=[]
     for key in revenue:
         people.append(key)
     for key in revenue[people[0]]:
         drinks.append(key)
-    #profit=revenue-expense
+    
     for worker in range(len(people)):
+        profits=[]
         personalRevenue=revenue[people[worker]]
         personalExpens=expenses[people[worker]]
-        drinkProfit={}
         for drink in range(len(drinks)):
             profit=personalRevenue[drinks[drink]]-personalExpens[drinks[drink]]
-            drinkProfit[drinks[drink]]=profit
-            profits[people[worker]]=drinkProfit
-    print(profits)
-profit(revenue, expenses)
+            if profit<0:
+                profit=0
+            profits.append(profit)
+        commision=sum(profits)*0.062
+        commissions[people[worker]]=round(commision, 2)
+    return commissions
+    
+print(profit(revenue, expenses))
